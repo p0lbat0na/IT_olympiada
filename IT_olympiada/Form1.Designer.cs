@@ -50,7 +50,6 @@
             this.результатыToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.какиеУчатстникиЗанялиПризовыеМестаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -235,21 +234,11 @@
             this.dataGridView1.Size = new System.Drawing.Size(685, 362);
             this.dataGridView1.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(108, 424);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 477);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(709, 415);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -287,7 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem результатыToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem какиеУчатстникиЗанялиПризовыеМестаToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
     }
 }
 
