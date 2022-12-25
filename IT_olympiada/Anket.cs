@@ -51,7 +51,8 @@ namespace IT_olympiada
             {
                 label1.Text = "Личное задание";
                 label2.Text = "Максимальный балл";
-                glavPole = "Личные_задания";
+                label3.Text = "Код_задачи";
+                glavPole = "Код_задачи";
             }
             tablica = table;
         }
@@ -61,6 +62,7 @@ namespace IT_olympiada
             string znachenie = textBox1.Text;
 
             if (tablica == "Участники") znachenie = textBox2.Text;
+            if (tablica == "Задачи") znachenie = textBox3.Text;
             poisk(tablica, znachenie, glavPole);
         }
 
@@ -136,7 +138,7 @@ namespace IT_olympiada
                 }
                 if (tablica == "Задачи")
                 {
-                    query = $"INSERT INTO Задачи (Личные_задания,Максимальное_количество_баллов)VALUES(@znach1, @znach2,@znach3)";
+                    query = $"INSERT INTO Задачи (Личные_задания,Максимальное_количество_баллов,Код_задачи)VALUES(@znach1, @znach2,@znach3)";
                 }
                 if (tablica == "Результаты")
                 {
@@ -152,7 +154,7 @@ namespace IT_olympiada
                 if (!String.IsNullOrEmpty(znach1))
                 {
                     command.Parameters.Add("@znach1", znach1);
-                    command.Parameters.Add("@znach1", znach2);
+                    command.Parameters.Add("@znach2", znach2);
                     command.Parameters.Add("@znach3", znach3);
                     command.Parameters.Add("@znach4", znach4);
                     command.Parameters.Add("@znach5", znach5);
@@ -181,7 +183,7 @@ namespace IT_olympiada
                     }
                     if (tablica == "Задачи")
                     {
-                        query = $"UPDATE Задачи SET Максимальное_количество_баллов=@znach2 WHERE Личные_задания=@znach1";
+                        query = $"UPDATE Задачи SET Максимальное_количество_баллов=@znach2, Личные_задания=@znach1 WHERE Код_задачи=znach3";
                     }
                     if (tablica == "Результаты")
                     {
@@ -189,7 +191,7 @@ namespace IT_olympiada
                     }
                     if (tablica == "Команды")
                     {
-                        query = $"UPDATE Команды SET Название_команды=@znach2WHERE Код_команды=@znach1";
+                        query = $"UPDATE Команды SET Название_команды=@znach2 WHERE Код_команды=@znach1";
                     }
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -197,7 +199,7 @@ namespace IT_olympiada
                     if (!String.IsNullOrEmpty(znach1))
                     {
                         command.Parameters.Add("@znach1", znach1);
-                        command.Parameters.Add("@znach1", znach1);
+                        command.Parameters.Add("@znach2", znach1);
                         command.Parameters.Add("@znach3", znach3);
                         command.Parameters.Add("@znach4", znach4);
                         command.Parameters.Add("@znach5", znach5);
@@ -227,9 +229,10 @@ namespace IT_olympiada
                 zapros = $"DELETE FROM Участники WHERE Номер_участника=@znach";
             }
             if (tablica == "Задачи")
-            
+            {
+                znach=textBox3.Text;
                 zapros = $"DELETE FROM Задачи WHERE Личные_задания=@znach";
-
+            }
             if (tablica == "Результаты")
 
                 zapros = $"DELETE FROM Результаты WHERE Номер_записи=@znach";

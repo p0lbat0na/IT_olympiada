@@ -255,7 +255,7 @@ namespace IT_olympiada
 
 
 
-        public void Prizeri(string[] mesta, int[,] elementi, int kolvo,int goldIndex = 1,int silverIndex = 1,int bronzeIndex=1)
+        public void Prizeri(string[] mesta, int[,] elementi, int kolvo)
         {
             elementi[0, 2] = 1;
             int gold = 0;           
@@ -265,17 +265,17 @@ namespace IT_olympiada
                 if (elementi[i, 1] > gold)
                 {
                     gold = elementi[i, 1];
-                    goldIndex = elementi[i,0];
+                    
                     elementi[i, 2] = 1;
                 }
             }
             elementi[1, 2] = 2;
-            int silver = 0;
+            int silver = 1;
             for (int i = 0; i < kolvo; i++)
             {
                 if (elementi[i, 1] > silver && elementi[i, 1] != gold)
                 {
-                    silverIndex = elementi[i, 0];
+                    
                     silver = elementi[i, 1];
                     elementi[i, 2] = 2;
                 }
@@ -288,7 +288,7 @@ namespace IT_olympiada
                 {
                     if (elementi[i, 1] > bronze && elementi[i, 1] != silver && elementi[i, 1] != gold)
                     {
-                        bronzeIndex = elementi[i, 0];
+                        
                         bronze = elementi[i, 1];
                         elementi[i, 2] = 3;
                     }
