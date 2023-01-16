@@ -22,25 +22,30 @@ namespace IT_olympiada
 
             if (table == "Команды")
             {
-                label1.Text = "Код команды";
-                label2.Text = "Название";            
-                
+                label1.Text = "Код команды[ключ]";
+                label2.Text = "Название";
+                label3.Hide();
+                label4.Hide();
+                label5.Hide();
+                textBox3.Hide();
+                textBox4.Hide();
+                textBox5.Hide();
                 glavPole = "Код_команды";
             }
             if (table == "Результаты")
             {
-                label1.Text = "Номер";
+                label1.Text = "Номер[ключ]";
                 label2.Text = "Номер участника";
                 label3.Text = "Код задачи";
                 label4.Text = "Балл";
-                
-                
+                label5.Hide();                
+                textBox5.Hide();
                 glavPole = "Номер_записи";
             }
             if (table == "Участники")
             {
                 label1.Text = "Код команды";
-                label2.Text = "Номер участника";
+                label2.Text = "Номер участника[ключ]";
                 label3.Text = "ФИО";
                 label4.Text = "Номер школы";
                 label5.Text = "Возраст";
@@ -51,8 +56,13 @@ namespace IT_olympiada
             {
                 label1.Text = "Личное задание";
                 label2.Text = "Максимальный балл";
-                label3.Text = "Код_задачи";
+                label3.Text = "Код_задачи[ключ]";
                 glavPole = "Код_задачи";
+                
+                textBox4.Hide();
+                textBox5.Hide();
+                label4.Hide();
+                label5.Hide();
             }
             tablica = table;
         }
@@ -60,10 +70,12 @@ namespace IT_olympiada
         private void button1_Click(object sender, EventArgs e)
         {
             string znachenie = textBox1.Text;
-
             if (tablica == "Участники") znachenie = textBox2.Text;
             if (tablica == "Задачи") znachenie = textBox3.Text;
-            poisk(tablica, znachenie, glavPole);
+            if (int.TryParse(znachenie, out var parsedNumber))
+            {
+                poisk(tablica, znachenie, glavPole);
+            }
         }
 
         public void poisk(string table, string znach, string pole)
@@ -130,8 +142,8 @@ namespace IT_olympiada
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "";
-            try
-            {
+            //try
+            //{
                 if (tablica == "Участники")
                 {
                     query = $"INSERT INTO Участники (Код_команды,Номер_участника,ФИО,Номер_школы,Возраст)VALUES(@znach1, @znach2,@znach3,@znach4,@znach5)";
@@ -162,54 +174,58 @@ namespace IT_olympiada
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Данные сохранены");
-            }
-            catch
-            {
-
-                DialogResult result = MessageBox.Show(
-                "Такая запись уже существует. Перезаписать данные?",
-                "Сообщение",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.None,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-
-                if (result == DialogResult.Yes)
-                {
-
-                    if (tablica == "Участники")
-                    {
-                        query = $"UPDATE Участники SET Код_команды=@znach1,ФИО=@znach3,Номер_школы=@znach4,Возраст=@znach5 WHERE Номер_участника=@znach2" ;
-                    }
-                    if (tablica == "Задачи")
-                    {
-                        query = $"UPDATE Задачи SET Максимальное_количество_баллов=@znach2, Личные_задания=@znach1 WHERE Код_задачи=znach3";
-                    }
-                    if (tablica == "Результаты")
-                    {
-                        query = $"UPDATE Результаты SET Код_задачи=@znach2,Балл=@znach3 WHERE Номер_записи=@znach1";
-                    }
-                    if (tablica == "Команды")
-                    {
-                        query = $"UPDATE Команды SET Название_команды=@znach2 WHERE Код_команды=@znach1";
-                    }
-
-                    SqlCommand command = new SqlCommand(query, connection);
-
-                    if (!String.IsNullOrEmpty(znach1))
-                    {
-                        command.Parameters.Add("@znach1", znach1);
-                        command.Parameters.Add("@znach2", znach1);
-                        command.Parameters.Add("@znach3", znach3);
-                        command.Parameters.Add("@znach4", znach4);
-                        command.Parameters.Add("@znach5", znach5);
-                        
-                    }
-
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Данные изменены");
-                }
-            }
+            //}
+            //catch
+            //{
+            //
+            //    DialogResult result = MessageBox.Show(
+            //    "Такая запись уже существует. Перезаписать данные?",
+            //    "Сообщение",
+            //    MessageBoxButtons.YesNo,
+            //    MessageBoxIcon.None,
+            //    MessageBoxDefaultButton.Button1,
+            //    MessageBoxOptions.DefaultDesktopOnly);
+            //
+            //    if (result == DialogResult.Yes)
+            //    {
+            //
+            //        if (tablica == "Участники")
+            //        {
+            //            query = $"UPDATE Участники SET Код_команды=@znach1,ФИО=@znach3,Номер_школы=@znach4,Возраст=@znach5 WHERE Номер_участника=@znach2" ;
+            //        }
+            //        if (tablica == "Задачи")
+            //        {
+            //            query = $"UPDATE Задачи SET Личные_задания=@znach1, Максимальное_количество_баллов=@znach2 WHERE Код_задачи=@znach3";
+            //        }
+            //        if (tablica == "Результаты")
+            //        {
+            //            query = $"UPDATE Результаты SET Номер_участника=@znach2, Код_задачи=@znach3, Балл=@znach4  WHERE Номер_записи=@znach1";
+            //        }
+            //        if (tablica == "Команды")
+            //        {
+            //            query = $"UPDATE Команды SET Название_команды=@znach2 WHERE Код_команды=@znach1";
+            //        }
+            //
+            //        SqlCommand command = new SqlCommand(query, connection);
+            //
+            //        if (!String.IsNullOrEmpty(znach3))
+            //        {
+            //            command.Parameters.Add("@znach1", znach1);
+            //            command.Parameters.Add("@znach2", znach2);
+            //            command.Parameters.Add("@znach3", znach3);
+            //            command.Parameters.Add("@znach4", znach4);
+            //            command.Parameters.Add("@znach5", znach5);
+            //            
+            //        }
+            //        try
+            //        {
+            //            command.ExecuteNonQuery();
+            //            MessageBox.Show("Данные изменены");
+            //        }
+            //        catch { MessageBox.Show("Ошибка ввода данных"); }
+            //            
+            //    }
+            //}
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -240,8 +256,16 @@ namespace IT_olympiada
 
             SqlCommand command = new SqlCommand(zapros, connection);
             command.Parameters.Add("@znach", znach);
-            command.ExecuteNonQuery();
-            MessageBox.Show("Данные удалены");
+            try
+            {
+                command.ExecuteNonQuery();
+                MessageBox.Show("Данные удалены");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления."+'\n' +"Необходимо удалить данные в других таблицах, связанные с этим полем");
+            }
+            
         }
     }
 }

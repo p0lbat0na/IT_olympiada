@@ -145,6 +145,8 @@ namespace IT_olympiada
 
         private void командыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //dataGridView1.Columns[0].HeaderText = "Номер Команды";
+            //dataGridView1.Columns[1].HeaderText = "Название команды";
             string st = "Select * from Команды";
             int k = 2;
             LoadData(st, k);
