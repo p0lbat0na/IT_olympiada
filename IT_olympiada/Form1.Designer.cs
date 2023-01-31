@@ -75,8 +75,8 @@
             this.задачиToolStripMenuItem,
             this.результатыToolStripMenuItem});
             this.просмотрToolStripMenuItem.Name = "просмотрToolStripMenuItem";
-            this.просмотрToolStripMenuItem.Size = new System.Drawing.Size(81, 21);
-            this.просмотрToolStripMenuItem.Text = "Просмотр";
+            this.просмотрToolStripMenuItem.Size = new System.Drawing.Size(66, 21);
+            this.просмотрToolStripMenuItem.Text = "Данные";
             // 
             // участникиToolStripMenuItem
             // 
@@ -114,8 +114,9 @@
             this.задачиToolStripMenuItem1,
             this.результатыToolStripMenuItem1});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
-            this.данныеToolStripMenuItem.Size = new System.Drawing.Size(66, 21);
-            this.данныеToolStripMenuItem.Text = "Данные";
+            this.данныеToolStripMenuItem.Size = new System.Drawing.Size(81, 21);
+            this.данныеToolStripMenuItem.Text = "Просмотр";
+            this.данныеToolStripMenuItem.Click += new System.EventHandler(this.данныеToolStripMenuItem_Click);
             // 
             // участникиToolStripMenuItem1
             // 

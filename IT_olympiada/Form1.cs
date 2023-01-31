@@ -476,5 +476,10 @@ namespace IT_olympiada
             f2.Show();
             
         }
+
+        private void данныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
