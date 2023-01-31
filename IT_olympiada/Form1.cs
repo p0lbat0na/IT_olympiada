@@ -13,15 +13,22 @@ namespace IT_olympiada
 {
     public partial class Form1 : Form
     {
+        public static Form1 SelfRef { get; set; }
         public Form1()
         {
             InitializeComponent();
+            SelfRef = this;
         }
 
-        private void LoadData(string st, int k)
+        
+
+
+        public void LoadData(string st, int k)
         {
-            
+            dataGridView1.RowHeadersVisible = false;
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = st;
@@ -64,13 +71,17 @@ namespace IT_olympiada
                 dataGridView1.Rows.Add(s);
         }
 
+        
+
         private void результатыToolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
             string[] сolumnName = new string[] { "Номер команды",  "Баллы", "Место",};
 
             int k = 2;
-
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string zapros = $"SELECT Участники.Код_команды, SUM (Результаты.Балл) FROM Участники JOIN Результаты ON Результаты.Номер_участника = Участники.Номер_участника JOIN Команды ON Команды.Код_команды=Участники.Код_команды WHERE Участники.Код_команды!=365 GROUP BY Участники.Код_команды ORDER BY Участники.Код_команды";
@@ -131,6 +142,7 @@ namespace IT_olympiada
 
         private void участникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
             string st = "Select * from Участники";
             int k = 5;
             LoadData(st, k);
@@ -138,6 +150,7 @@ namespace IT_olympiada
         
         private void результатыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
             string st = "Select * from Результаты";
             int k = 4;
             LoadData(st, k);
@@ -147,6 +160,7 @@ namespace IT_olympiada
         {
             //dataGridView1.Columns[0].HeaderText = "Номер Команды";
             //dataGridView1.Columns[1].HeaderText = "Название команды";
+            dataGridView1.Columns.Clear();
             string st = "Select * from Команды";
             int k = 2;
             LoadData(st, k);
@@ -154,6 +168,7 @@ namespace IT_olympiada
 
         private void задачиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
             string st = "Select * from Задачи";
             int k = 3;
             LoadData(st, k);
@@ -161,6 +176,7 @@ namespace IT_olympiada
 
         private void информацияОКомандахИУчастникахToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
             string st = "Select Код_команды, Номер_участника from Участники";
             int k = 2;
             LoadData(st, k);
@@ -171,8 +187,10 @@ namespace IT_olympiada
             string[] сolumnName = new string[] { "Участник", "Баллы", "Команда", "Взяла" };
             string st = "Select Номер_участника, SUM (Балл) from Результаты  GROUP BY Номер_участника ORDER BY Номер_участника";
             int k = 2;
-            
+            dataGridView1.Columns.Clear();
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string zapros = st;
@@ -318,10 +336,11 @@ namespace IT_olympiada
         private void какиеУчатстникиЗанялиПризовыеМестаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string[] сolumnName = new string[] { "Номер участника", "Баллы", "Место", };
-
+            dataGridView1.Columns.Clear();
             int k = 2;
-
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             dataGridView1.Rows.Clear();
@@ -379,50 +398,83 @@ namespace IT_olympiada
 
         private void участникиToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Участники";
+            int k = 5;
+            LoadData(st, k);
             Anket f3 = new Anket("Участники");
             f3.Show();
         }
 
         private void командыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Команды";
+            int k = 2;
+            LoadData(st, k);
             Anket f3 = new Anket("Команды");
             f3.Show();
         }
 
         private void задачиToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Задачи";
+            int k = 3;
+            LoadData(st, k);
             Anket f3 = new Anket("Задачи");
             f3.Show();
         }
 
         private void результатыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Результаты";
+            int k = 4;
+            LoadData(st, k);
             Anket f3 = new Anket("Результаты");
             f3.Show();
         }
 
         private void поУчастникамToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Участники";
+            int k = 5;
+            LoadData(st, k);
             Query f2 = new Query("Участники");
             f2.Show();
         }
 
         private void поКомандамToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Команды";
+            int k = 2;
+            LoadData(st, k);
             Query f2 = new Query("Команды");
             f2.Show();
         }
 
         private void поЗадачамToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Задачи";
+            int k = 3;
+            LoadData(st, k);
             Query f2 = new Query("Задачи");
             f2.Show();
         }
 
         private void поРезультатамToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+            string st = "Select * from Результаты";
+            int k = 4;
+            LoadData(st, k);
             Query f2 = new Query("Результаты");
             f2.Show();
+            
         }
     }
 }

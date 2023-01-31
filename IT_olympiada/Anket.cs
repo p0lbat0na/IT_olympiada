@@ -81,7 +81,9 @@ namespace IT_olympiada
         public void poisk(string table, string znach, string pole)
         {
             if (!String.IsNullOrEmpty(znach))
-            { 
+            {
+                //string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
+                
                 string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
                 //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
 
@@ -139,6 +141,9 @@ namespace IT_olympiada
             string znach5 = textBox5.Text;
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string st = "Select * from Задачи";
+            int stolbKolvo = 0;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "";
@@ -146,18 +151,26 @@ namespace IT_olympiada
             {
                 if (tablica == "Участники")
                 {
+                    stolbKolvo = 5;
+                    st = "Select * from Участники";
                     query = $"INSERT INTO Участники (Код_команды,Номер_участника,ФИО,Номер_школы,Возраст)VALUES(@znach1, @znach2,@znach3,@znach4,@znach5)";
                 }
                 if (tablica == "Задачи")
                 {
+                    stolbKolvo = 3;
+                    st = "Select * from Задачи";
                     query = $"INSERT INTO Задачи (Личные_задания,Максимальное_количество_баллов,Код_задачи)VALUES(@znach1, @znach2,@znach3)";
                 }
                 if (tablica == "Результаты")
                 {
+                    stolbKolvo = 4;
+                    st = "Select * from Результаты";
                     query = $"INSERT INTO Результаты (Номер_записи,Номер_участника,Код_задачи,Балл)VALUES(@znach1, @znach2,@znach3,@znach4)";
                 }
                 if (tablica == "Команды")
                 {
+                    stolbKolvo = 2;
+                    st = "Select * from Команды";
                     query = $"INSERT INTO Команды (Код_команды,Название_команды)VALUES(@znach1, @znach2)";
                 }
 
@@ -191,18 +204,26 @@ namespace IT_olympiada
             
                     if (tablica == "Участники")
                     {
+                        stolbKolvo = 5;
+                        st = "Select * from Участники";
                         query = $"UPDATE Участники SET Код_команды=@znach1,ФИО=@znach3,Номер_школы=@znach4,Возраст=@znach5 WHERE Номер_участника=@znach2" ;
                     }
                     if (tablica == "Задачи")
                     {
+                        stolbKolvo = 3;
+                        st = "Select * from Задачи";
                         query = $"UPDATE Задачи SET Личные_задания=@znach1, Максимальное_количество_баллов=@znach2 WHERE Код_задачи=@znach3";
                     }
                     if (tablica == "Результаты")
                     {
+                        stolbKolvo = 4;
+                        st = "Select * from Результаты";
                         query = $"UPDATE Результаты SET Номер_участника=@znach2, Код_задачи=@znach3, Балл=@znach4  WHERE Номер_записи=@znach1";
                     }
                     if (tablica == "Команды")
                     {
+                        stolbKolvo = 2;
+                        st = "Select * from Команды";
                         query = $"UPDATE Команды SET Название_команды=@znach2 WHERE Код_команды=@znach1";
                     }
             
@@ -226,34 +247,53 @@ namespace IT_olympiada
                         
                 }
             }
-        }
+            
+            
+            if (Form1.SelfRef != null)
+            {
+                Form1.SelfRef.LoadData(st, stolbKolvo);
+            }
+        
+    }
 
         private void button3_Click(object sender, EventArgs e)
         {
             string znach = textBox1.Text;
+            //string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
+           
             string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-
+            string st = "Select * from Задачи";
             string zapros = "";
-            if (tablica == "Команды")
-                zapros = $"DELETE FROM Команды WHERE Код_команды=@znach";
+            int stolbKolvo = 0;
             if (tablica == "Участники")
             {
+                stolbKolvo = 5;
+                st = "Select * from Участники";
                 znach = textBox2.Text;
                 zapros = $"DELETE FROM Участники WHERE Номер_участника=@znach";
             }
             if (tablica == "Задачи")
             {
-                znach=textBox3.Text;
+                stolbKolvo = 3;
+                st = "Select * from Задачи";
+                znach =textBox3.Text;
                 zapros = $"DELETE FROM Задачи WHERE Личные_задания=@znach";
             }
             if (tablica == "Результаты")
-
+            {
+                stolbKolvo = 4;
+                st = "Select * from Результаты";
                 zapros = $"DELETE FROM Результаты WHERE Номер_записи=@znach";
-
-
+            }
+            if (tablica == "Команды")
+            {
+                stolbKolvo = 2;
+                st = "Select * from Команды";
+                zapros = $"DELETE FROM Команды WHERE Код_команды=@znach";
+            }
             SqlCommand command = new SqlCommand(zapros, connection);
             command.Parameters.Add("@znach", znach);
             try
@@ -265,7 +305,12 @@ namespace IT_olympiada
             {
                 MessageBox.Show("Ошибка удаления."+'\n' +"Необходимо удалить данные в других таблицах, связанные с этим полем");
             }
+           
             
+            if (Form1.SelfRef != null)
+            {
+                Form1.SelfRef.LoadData(st,stolbKolvo);
+            }
         }
     }
 }
