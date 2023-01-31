@@ -58,9 +58,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.просмотрToolStripMenuItem,
-            this.данныеToolStripMenuItem,
+            this.запросыToolStripMenuItem,
             this.поискToolStripMenuItem,
-            this.запросыToolStripMenuItem});
+            this.данныеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(711, 25);

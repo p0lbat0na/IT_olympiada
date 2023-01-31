@@ -26,7 +26,7 @@ namespace IT_olympiada
         public void LoadData(string st, int k)
         {
             dataGridView1.RowHeadersVisible = false;
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
@@ -79,7 +79,7 @@ namespace IT_olympiada
             string[] сolumnName = new string[] { "Номер команды",  "Баллы", "Место",};
 
             int k = 2;
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
@@ -188,7 +188,7 @@ namespace IT_olympiada
             string st = "Select Номер_участника, SUM (Балл) from Результаты  GROUP BY Номер_участника ORDER BY Номер_участника";
             int k = 2;
             dataGridView1.Columns.Clear();
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
@@ -338,7 +338,7 @@ namespace IT_olympiada
             string[] сolumnName = new string[] { "Номер участника", "Баллы", "Место", };
             dataGridView1.Columns.Clear();
             int k = 2;
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);

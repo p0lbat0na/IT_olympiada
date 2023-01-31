@@ -82,9 +82,9 @@ namespace IT_olympiada
         {
             if (!String.IsNullOrEmpty(znach))
             {
-                //string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
+                string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
                 
-                string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+                //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
                 //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
 
                 string query = $"SELECT * FROM {table} WHERE {pole}=@znach";
@@ -139,7 +139,7 @@ namespace IT_olympiada
             string znach3 = textBox3.Text;
             string znach4 = textBox4.Text;
             string znach5 = textBox5.Text;
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             string st = "Select * from Задачи";
@@ -259,9 +259,9 @@ namespace IT_olympiada
         private void button3_Click(object sender, EventArgs e)
         {
             string znach = textBox1.Text;
-            //string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
+            string connectionString = @"Data Source=WIN-FRP3O4I9NI5;Initial Catalog=IT olimpiad;Integrated Security=True";
            
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=IT olympiad;Integrated Security=True";
             //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
